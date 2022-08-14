@@ -13,12 +13,11 @@ const ProductScreen = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             const {data} = await axios.get(`/api/products/${params.id}`)
-      
             setProduct(data)
         }
       
         fetchProduct()
-     }, [params.id])
+     }, [params])
 
     return (<>
         <Link className='btn btn-light my-3' to='/'> Go Back
