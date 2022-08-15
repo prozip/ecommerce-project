@@ -20,15 +20,13 @@ router.get('/', asyncHandler(async (req, res) => {
 // access   public
 router.get('/:id', asyncHandler(async (req, res) => {
     // separate error: https://www.mongodb.com/community/forums/t/performance-let-mongodb-return-errors-instead-of-preventing-them/148121
-    try {
-        const product = await Product.findById(req.params.id)
-        if (product) {
-            res.json(product)
-        } else {
-            res.status(404).json({ message: 'Product not found' })
-        }
-    } catch (error) {
-        res.status(400).json({ message: 'Bad Request' })
+
+    const product = await Product.findById(req.params.id)
+    if (product) {
+        res.json(product)
+    } else {
+        res.status(404)
+        throw new Error('Product not found')
     }
 }))
 
