@@ -7,7 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listProductDetails } from '../actions/productActions'
 
-const ProductScreen = () => {
+const ProductScreen = ({history}) => {
     const params = useParams()
     // const product = products.find((p)=>p._id === params.id)
 
@@ -21,6 +21,10 @@ const ProductScreen = () => {
     useEffect(() => {
         dispatch(listProductDetails(params.id))
      }, [dispatch, params])
+
+     const addToCartHandler = () => {
+        history.push(`/cart/${params.id}?qty=${qty}`)
+     }
 
     return (<>
         <Link className='btn btn-light my-3' to='/'> 
@@ -81,7 +85,7 @@ const ProductScreen = () => {
                                             value={qty} 
                                             onChange={(e) => setQty(e.target.value)}
                                         >
-                                            {[...Array(product.countInStock).key()].map((x) => (
+                                            {[...Array(product.countInStock).keys()].map((x) => (
                                                 <option key={x + 1} value={x + 1}>
                                                     {x + 1}
                                                 </option>
@@ -94,7 +98,10 @@ const ProductScreen = () => {
                         )}
  
                         <ListGroup.Item>
-                            <Button className='btn-block' type='button' disabled={product.countInStock === 0}>
+                            
+                            <Button 
+                            onClick={addToCartHandler}
+                            className='btn-block' type='button' disabled={product.countInStock === 0}>
                                 Add To Cart
                             </Button>
                         </ListGroup.Item>
