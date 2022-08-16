@@ -13,7 +13,7 @@ const ProductScreen = () => {
 
     // const product = products.find((p)=>p._id === params.id)
 
-    const [qty, setQty] = useState(0)
+    const [qty, setQty] = useState(1)
 
     const dispatch = useDispatch()
 
