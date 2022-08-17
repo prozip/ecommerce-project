@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "49b09905-6899-4609-bb09-ac9352996577",
+    "colName": "ecommerce-project",
+    "created": "2022-08-15T09:27:27.049Z",
+    "sortNum": 20000,
+    "folders": [
+      {
+        "_id": "dd6f7deb-7ba7-4fa0-9c44-0a2c4af42468",
+        "name": "products",
+        "containerId": "",
+        "created": "2022-08-15T09:27:44.293Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "79d8e363-d68d-4eab-b05b-03d3039b5534",
+        "name": "Users & Auth",
+        "containerId": "",
+        "created": "2022-08-17T03:34:42.109Z",
+        "sortNum": 20000
+      }
+    ]
+  }
+]
