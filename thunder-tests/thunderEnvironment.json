@@ -5,11 +5,15 @@
     "default": true,
     "sortNum": 10000,
     "created": "2022-08-15T09:29:34.461Z",
-    "modified": "2022-08-17T14:30:39.984Z",
+    "modified": "2022-08-19T03:31:44.413Z",
     "data": [
       {
         "name": "URL",
         "value": "http://localhost:5000"
+      },
+      {
+        "name": "TOKEN",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZjhjYjFjMTQzMjVlMTkwMjAzZjFhNiIsImlhdCI6MTY2MDg3OTkwNCwiZXhwIjoxNjYzNDcxOTA0fQ.ACkgA8v3MBo0nWkhI3iPA1HuGIeJqU8DdVv3xAoJe_4"
       }
     ]
   }
