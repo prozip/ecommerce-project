@@ -29,13 +29,13 @@ const PaymentScreen = () => {
     navigate('/placeorder')
   }
 
-  return <FormContainer>
+  return ( <FormContainer>
     <CheckoutSteps step1 step2 step3/>
     <h1>Payment Method</h1>
     <Form onSubmit={submitHandler}>
         <Form.Group>
             <Form.Label as='legend'>Select Method</Form.Label>
-        </Form.Group>
+        
         <Col>
             <Form.Check 
             type='radio' 
@@ -56,11 +56,12 @@ const PaymentScreen = () => {
             onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
         </Col>
-
+        </Form.Group>
       <Button type='submit' variant='primary'>Continue</Button>
       
     </Form>
   </FormContainer>
-}
+  )
+} 
 
 export default PaymentScreen
