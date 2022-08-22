@@ -27,27 +27,27 @@ const PlaceOrderScreen = () => {
         Number(cart.taxPrice)
         ).toFixed(2)
     
-const orderCreate = useSelector(state => state.orderCreate)
-const { order, success, error } = orderCreate
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, success, error } = orderCreate
 
-useEffect(() => {
-    if(success){
-        navigate(`/order/${order._id}`)
+    useEffect(() => {
+        if(success){
+            navigate(`/order/${order._id}`)
+        }
+    },[navigate, order._id, success]) 
+
+    const placeOrderHandler = () => {
+        dispatch(
+            createOrder({
+                orderItems: cart.cartItems,
+                shippingAddress: cart.shippingAddress,
+                paymentMethod: cart.paymentMethod,
+                itemsPrice: cart.itemsPrice,
+                shippingPrice: cart.shippingPrice,
+                taxPrice : cart.taxPrice,
+                totalPrice : cart.totalPrice,
+        }))
     }
-},[navigate, order._id, success]) 
-
-const placeOrderHandler = () => {
-    dispatch(
-        createOrder({
-            orderItems: cart.cartItems,
-            shippingAddress: cart.shippingAddress,
-            paymentMethod: cart.paymentMethod,
-            itemsPrice: cart.itemsPrice,
-            shippingPrice: cart.shippingPrice,
-            taxPrice : cart.taxPrice,
-            totalPrice : cart.totalPrice,
-    }))
-}
 
      
   return (
