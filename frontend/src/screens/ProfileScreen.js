@@ -5,7 +5,7 @@ import {LinkContainer} from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getUserDetails, getUpdateUserProfile } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrder } from '../actions/orderActions'
 
 const ProfileScreen = () => {
@@ -51,7 +51,7 @@ const ProfileScreen = () => {
         if (password !== confirmPassword) {
             setMessage('Passwords do not match')
         } else {
-            dispatch(getUpdateUserProfile({ id: user._id, name, email, password }))
+            dispatch(updateUserProfile({ id: user._id, name, email, password }))
         }
     }
 

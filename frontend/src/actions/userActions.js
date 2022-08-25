@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
-import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/userConstants"
+import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS, USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/userConstants"
 
 export const login = (email, password) => async (dispatch) =>{
     try {
@@ -119,7 +119,7 @@ export const getUserDetails = (id) => async (dispatch, getSate) =>{
     }
 }
 
-export const getUpdateUserProfile = (user) => async (dispatch, getSate) =>{
+export const updateUserProfile = (user) => async (dispatch, getSate) =>{
     try {
         dispatch({
             type: USER_UPDATE_PROFILE_REQUEST,
@@ -147,6 +147,38 @@ export const getUpdateUserProfile = (user) => async (dispatch, getSate) =>{
             payload: error.response && error.response.data.message 
                 ? error.response.data.message
                 : error.message, 
+        })
+    }
+}
+
+export const listUsers = (r) => async (dispatch, getSate) =>{
+    try {
+        dispatch({
+            type: USER_LIST_REQUEST,
+        })
+
+        const { userLogin: { userInfo } }  = getSate()
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInfo.token}`
+        },
+    }
+
+    const { data } = await axios.get(`/api/users`, config )
+
+    dispatch({
+        type: USER_LIST_SUCCESS,
+        payload: data
+    })
+
+    } catch (error) {
+        dispatch({
+            type: USER_LIST_FAIL,
+            payload: 
+                error.response && error.response.data.message 
+                    ? error.response.data.message
+                    : error.message, 
         })
     }
 }
