@@ -5,6 +5,9 @@ import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
+import { Link } from 'react-router-dom'
+
+
 import { listProducts } from '../actions/productActions'
 
 const HomeScreen = () => {
@@ -31,6 +34,9 @@ const HomeScreen = () => {
                        <Product product={product} />
                     </Col>
                 ))}
+                <Link to={`/order/63035406121877f2ead90b20`}>
+                  <h1>Hello</h1>
+                </Link>
             </Row>
 
           )} 
