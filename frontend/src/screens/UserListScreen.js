@@ -1,9 +1,9 @@
-import React, {useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
-import Loader  from '../components/Loader'
+import Loader from '../components/Loader'
 import { listUsers } from '../actions/userActions'
 
 
@@ -11,21 +11,21 @@ const UserListScreen = () => {
     const dispatch = useDispatch()
 
     const userList = useSelector(state => state.userList)
-    const {loading, error, user} = userList
+    const { loading, error, users } = userList
     useEffect(() => {
         dispatch(listUsers())
     }, [dispatch])
 
-    const deleteHandler= (id) => {
+    const deleteHandler = (id) => {
         console.log('delete')
     }
 
 
     return (
         <>
-         <h1>User</h1>
-    {loading?<Loader /> : error ? <Message variant='danger'>{error}</Message>: (
-        <><Table striped bordered hover responsive className='table-sm'>
+            <h1>User</h1>
+            {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
+                <Table striped bordered hover responsive className='table-sm'>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -36,8 +36,8 @@ const UserListScreen = () => {
                         </tr>
                     </thead>
 
-                </Table><tbody>
-                        {user.map(user => (
+                    <tbody>
+                        {users.map(user => (
                             <tr key={user._id}>
                                 <td>{user._id}</td>
                                 <td>{user.name}</td>
@@ -61,10 +61,11 @@ const UserListScreen = () => {
                                 </td>
                             </tr>
                         ))}
-                    </tbody></>
-    ) }
+                    </tbody>
+                </Table>
+            )}
         </>
-        
+
     )
 }
 

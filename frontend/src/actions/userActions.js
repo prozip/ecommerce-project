@@ -151,7 +151,7 @@ export const updateUserProfile = (user) => async (dispatch, getSate) =>{
     }
 }
 
-export const listUsers = (r) => async (dispatch, getSate) =>{
+export const listUsers = () => async (dispatch, getSate) =>{
     try {
         dispatch({
             type: USER_LIST_REQUEST,
