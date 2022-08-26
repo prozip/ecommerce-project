@@ -85,12 +85,12 @@
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-08-17T13:40:24.545Z",
-    "modified": "2022-08-17T13:55:51.107Z",
+    "modified": "2022-08-26T03:23:13.513Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\":\"Steve Smith\",\n  \"email\":\"steve@example.com\",\n  \"password\":\"wtf\"\n}",
+      "raw": "{\n  \"name\":\"test03\",\n  \"email\":\"test03@example.com\",\n  \"password\":\"123456\"\n}",
       "form": []
     },
     "tests": []
@@ -146,6 +146,24 @@
     "sortNum": 150000,
     "created": "2022-08-25T10:12:59.446Z",
     "modified": "2022-08-25T10:31:55.256Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "b87694ac-c7a6-44e3-abac-eabd36ff5a55",
+    "colId": "49b09905-6899-4609-bb09-ac9352996577",
+    "containerId": "79d8e363-d68d-4eab-b05b-03d3039b5534",
+    "name": "DELETE /api/users/:id",
+    "url": "{{URL}}/api/users/62fcf366ea710acd3aafdff7",
+    "method": "DELETE",
+    "sortNum": 170000,
+    "created": "2022-08-26T02:57:09.052Z",
+    "modified": "2022-08-26T03:00:30.138Z",
     "headers": [],
     "params": [],
     "auth": {
