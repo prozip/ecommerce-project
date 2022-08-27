@@ -212,5 +212,23 @@
       "bearer": "{{TOKEN}}"
     },
     "tests": []
+  },
+  {
+    "_id": "f5b61b1d-2091-456e-9763-daec50872120",
+    "colId": "49b09905-6899-4609-bb09-ac9352996577",
+    "containerId": "dd6f7deb-7ba7-4fa0-9c44-0a2c4af42468",
+    "name": "DELETE /api/products/:id",
+    "url": "{{URL}}/api/products/62f8cb1c14325e190203f1a9",
+    "method": "DELETE",
+    "sortNum": 200000,
+    "created": "2022-08-27T03:51:05.370Z",
+    "modified": "2022-08-27T03:53:09.349Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
   }
 ]
