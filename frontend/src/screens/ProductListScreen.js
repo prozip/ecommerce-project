@@ -84,7 +84,7 @@ const ProductListScreen = () => {
                                     ${product.price}
                                 </td>
                                 <td>
-                                    {product.catagory}
+                                    {product.category}
                                 </td>
                                 <td>{product.brand}</td>
                                 <td>

@@ -8,9 +8,12 @@
     "method": "GET",
     "sortNum": 50000,
     "created": "2022-08-15T09:28:32.202Z",
-    "modified": "2022-08-15T09:32:08.761Z",
+    "modified": "2022-08-28T02:26:21.105Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer"
+    },
     "tests": []
   },
   {
@@ -225,6 +228,47 @@
     "modified": "2022-08-27T03:53:09.349Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "81bb02db-c5e6-49e3-8be1-8d4b7562407a",
+    "colId": "49b09905-6899-4609-bb09-ac9352996577",
+    "containerId": "dd6f7deb-7ba7-4fa0-9c44-0a2c4af42468",
+    "name": "POST /api/products",
+    "url": "{{URL}}/api/products",
+    "method": "POST",
+    "sortNum": 210000,
+    "created": "2022-08-28T02:18:57.552Z",
+    "modified": "2022-08-28T02:20:08.012Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "9bc654aa-4ad5-4ee2-b212-fb0200e47362",
+    "colId": "49b09905-6899-4609-bb09-ac9352996577",
+    "containerId": "dd6f7deb-7ba7-4fa0-9c44-0a2c4af42468",
+    "name": "PUT /api/products/:id",
+    "url": "{{URL}}/api/products/630ad472a6754d6a8ab7223f",
+    "method": "PUT",
+    "sortNum": 220000,
+    "created": "2022-08-28T02:40:47.894Z",
+    "modified": "2022-08-28T02:48:00.707Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"iphone 14 pro max\",\n  \"price\": 10,\n  \"image\": \"/images/sample.jpg\",\n  \"brand\": \"Sample brand\",\n  \"category\": \"Electronics\",\n  \"countInStock\": 10,\n  \"description\": \"sample description\"\n}",
+      "form": []
+    },
     "auth": {
       "type": "bearer",
       "bearer": "{{TOKEN}}"
