@@ -88,12 +88,12 @@
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-08-17T13:40:24.545Z",
-    "modified": "2022-08-26T03:55:13.177Z",
+    "modified": "2022-08-28T03:37:15.539Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\":\"test03\",\n  \"email\":\"test03@example.com\",\n  \"password\":\"123456\"\n}",
+      "raw": "{\n  \"name\":\"test01\",\n  \"email\":\"test01@example.com\",\n  \"password\":\"123456\"\n}",
       "form": []
     },
     "tests": []
