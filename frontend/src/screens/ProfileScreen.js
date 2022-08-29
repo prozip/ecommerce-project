@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
-import { listMyOrder } from '../actions/orderActions'
+import { listMyOrders } from '../actions/orderActions'
 
 const ProfileScreen = () => {
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ const ProfileScreen = () => {
         } else {
             if (!user.name) {
                 dispatch(getUserDetails('profile'))
-                dispatch(listMyOrder())
+                dispatch(listMyOrders())
             } else {
                 setName(user.name)
                 setEmail(user.email)
