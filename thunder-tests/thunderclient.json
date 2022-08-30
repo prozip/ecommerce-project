@@ -39,12 +39,12 @@
     "method": "POST",
     "sortNum": 70000,
     "created": "2022-08-17T03:35:04.011Z",
-    "modified": "2022-08-25T13:56:52.785Z",
+    "modified": "2022-08-30T14:45:16.968Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\":\"admin@example.com\",\n  \"password\":\"123456\"\n}",
+      "raw": "{\n  \"email\":\"jane@example.com\",\n  \"password\":\"123456\"\n}",
       "form": []
     },
     "tests": [
@@ -202,14 +202,9 @@
     "method": "PUT",
     "sortNum": 190000,
     "created": "2022-08-26T03:45:53.335Z",
-    "modified": "2022-08-26T03:49:30.307Z",
+    "modified": "2022-08-30T14:53:59.623Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "text",
-      "raw": "{\n 'name' : 'test02'\n}",
-      "form": []
-    },
     "auth": {
       "type": "bearer",
       "bearer": "{{TOKEN}}"
@@ -305,6 +300,29 @@
     "modified": "2022-08-30T14:17:32.958Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "5b528814-35d2-43f1-b279-842d9b1feae6",
+    "colId": "49b09905-6899-4609-bb09-ac9352996577",
+    "containerId": "dd6f7deb-7ba7-4fa0-9c44-0a2c4af42468",
+    "name": "POST /api/products/:id/reviews",
+    "url": "{{URL}}/api/products/63099df54b4e7aaa49aa0bcf/reviews",
+    "method": "POST",
+    "sortNum": 270000,
+    "created": "2022-08-30T14:38:13.901Z",
+    "modified": "2022-08-30T15:09:47.852Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"rating\": 5,\n  \"comment\": \"Great Headphones\"\n}",
+      "form": []
+    },
     "auth": {
       "type": "bearer",
       "bearer": "{{TOKEN}}"
