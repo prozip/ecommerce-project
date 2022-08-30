@@ -274,5 +274,41 @@
       "bearer": "{{TOKEN}}"
     },
     "tests": []
+  },
+  {
+    "_id": "084fd60e-8713-4a67-84a5-f1085cc2b77e",
+    "colId": "49b09905-6899-4609-bb09-ac9352996577",
+    "containerId": "a73af730-0c58-44ee-9666-22d97c98c8a6",
+    "name": "GET /api/orders/myorders",
+    "url": "{{URL}}/api/orders/myorders",
+    "method": "GET",
+    "sortNum": 240000,
+    "created": "2022-08-30T14:16:13.061Z",
+    "modified": "2022-08-30T14:16:42.645Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "a49b69f4-24f4-43c2-b797-94f13d0df7eb",
+    "colId": "49b09905-6899-4609-bb09-ac9352996577",
+    "containerId": "a73af730-0c58-44ee-9666-22d97c98c8a6",
+    "name": "GET /api/orders",
+    "url": "{{URL}}/api/orders",
+    "method": "GET",
+    "sortNum": 260000,
+    "created": "2022-08-30T14:17:04.027Z",
+    "modified": "2022-08-30T14:17:32.958Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
+    "tests": []
   }
 ]
