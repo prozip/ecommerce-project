@@ -17,7 +17,7 @@ const ProductScreen = () => {
     // const product = products.find((p)=>p._id === params.id)
 
 
-   
+
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
@@ -38,11 +38,11 @@ const ProductScreen = () => {
     } = productReviewCreate
 
     useEffect(() => {
-        if(successProductReview){
+        if (successProductReview) {
             alert('Review Submitted!')
             setRating(0)
             setComment('')
-            dispatch( {type: PRODUCT_CREATE_REVIEW_RESET})
+            dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
 
         }
         dispatch(listProductDetails(params.id))
@@ -55,10 +55,10 @@ const ProductScreen = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(createProductReview(params.id, (
+        dispatch(createProductReview(params.id, {
             rating,
-            comment 
-        )))
+            comment
+        }))
     }
 
     return (<>
@@ -151,13 +151,13 @@ const ProductScreen = () => {
                         {product.reviews ? product.reviews.length === 0 && <Message>No Reviews</Message> : null}
                         <ListGroup variant='flush'>
                             {product.reviews ? product.reviews.map((review) => (
-                                <ListGroup.Item key = {review._id}>
+                                <ListGroup.Item key={review._id}>
                                     <strong>{review.name}</strong>
                                     <Rating value={review.rating} />
                                     <p>{review.createdAt.substring(0, 10)}</p>
                                     <p>{review.comment}</p>
                                 </ListGroup.Item>
-                            )): null}
+                            )) : null}
                             <ListGroup.Item>
                                 <h2>Write a customer Review</h2>
                                 {errorProductReview && (<Message variant='danger'>{errorProductReview}</Message>)}
@@ -176,8 +176,8 @@ const ProductScreen = () => {
                                         </Form.Group>
                                         <Form.Group controlId='comment'>
                                             <Form.Label>Comment</Form.Label>
-                                            <Form.Control as='textarea' value={comment} onChange={(e) => setComment(e.target.value)}>                                
-                                          </Form.Control>
+                                            <Form.Control as='textarea' value={comment} onChange={(e) => setComment(e.target.value)}>
+                                            </Form.Control>
                                         </Form.Group>
                                         <Button type='submit' variant='primary'>
                                             Submit
@@ -188,7 +188,7 @@ const ProductScreen = () => {
                                         Please <Link to='login'> sign in</Link> to write a review
                                         {' '}
                                     </Message>
-                                
+
                                 )}
                             </ListGroup.Item>
                         </ListGroup>
