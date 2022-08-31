@@ -176,7 +176,7 @@ const ProductScreen = () => {
                                         </Form.Group>
                                         <Form.Group controlId='comment'>
                                             <Form.Label>Comment</Form.Label>
-                                            <Form.Control as='select' value={rating} onChange={(e) => setRating(e.target.value)}>                                
+                                            <Form.Control as='textarea' value={comment} onChange={(e) => setComment(e.target.value)}>                                
                                           </Form.Control>
                                         </Form.Group>
                                         <Button type='submit' variant='primary'>
