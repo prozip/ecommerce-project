@@ -5,7 +5,8 @@ import {Row, Col, Image, ListGroup, Card, Button, ListGroupItem, Form} from 'rea
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listProductDetails } from '../actions/productActions'
+import { listProductDetails, createProductReview } from '../actions/productActions'
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
 const ProductScreen = () => {
     const params = useParams()
@@ -14,11 +15,22 @@ const ProductScreen = () => {
     // const product = products.find((p)=>p._id === params.id)
 
     const [qty, setQty] = useState(1)
+    const [rating, setRating] = useState(0)
+    const [comment, setComment] = useState('')
 
     const dispatch = useDispatch()
 
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product} = productDetails
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const productReviewCreate = useSelector(state => state.productReviewCreate)
+    const { 
+        success: successProductReview, 
+        error: errorProductReview, 
+    } = productReviewCreate
       
     useEffect(() => {
         dispatch(listProductDetails(params.id))
@@ -33,6 +45,7 @@ const ProductScreen = () => {
         Go Back
         </Link>
         {loading ? <Loader /> : error ? <Message variant = 'danger'>{error}</Message> : (
+            <>
             <Row>
             <Col md={6}>
                 <Image src={product.image} alt={product.name} fluid/>
@@ -111,6 +124,13 @@ const ProductScreen = () => {
                 </Card>
             </Col>
         </Row>
+        <Row>
+            <Col md={6}>
+                <h2>Reviews</h2>
+                {product.reviews.length === 0 && <Message>No Reviews</Message> }
+            </Col>
+        </Row>
+        </>
         )}
 
         
