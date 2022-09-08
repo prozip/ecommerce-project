@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -10,7 +10,7 @@ import { listOrders } from '../actions/orderActions'
 
 const OrderListScreen = () => {
     const dispatch = useDispatch()
-    const location = useLocation() 
+    
     const navigate = useNavigate()
 
     const orderList = useSelector(state => state.orderList)
