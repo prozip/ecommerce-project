@@ -23,7 +23,7 @@ const ProductEditScreen = () => {
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
     const [uploading, setUploading] = useState(false)
-
+    const [fileImage, setFileImage] = useState(null)
 
 
     const dispatch = useDispatch()
@@ -59,17 +59,22 @@ const ProductEditScreen = () => {
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
-        const formData = new FormData()
-        formData.append('image', file)
+        setFileImage(file)
+    }
+
+    const submitHandler = async (e) => {
+        e.preventDefault()
+
         setUploading(true)
 
         try {
             const config = {
-                header: {
-                    'Content-Type': 'multipart/form-data'
+                headers: {
+                    'Content-Type': fileImage.type,
+                    "Access-Control-Allow-Origin": "*"
                 }
             }
-            const { data } = await axios.post('/api/upload', formData, config)
+            const { data } = await axios.post(`${process.env.REACT_APP_FETCH_URL}/api/upload`, fileImage, config)
 
             setImage(data)
             setUploading(false)
@@ -79,10 +84,7 @@ const ProductEditScreen = () => {
             setUploading(false)
 
         }
-    }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
         dispatch(
             updateProduct({
                 _id: productId,

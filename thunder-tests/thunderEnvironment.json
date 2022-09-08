@@ -5,7 +5,7 @@
     "default": true,
     "sortNum": 10000,
     "created": "2022-08-15T09:29:34.461Z",
-    "modified": "2022-08-30T14:45:16.963Z",
+    "modified": "2022-09-06T14:44:08.803Z",
     "data": [
       {
         "name": "URL",
@@ -14,6 +14,10 @@
       {
         "name": "TOKEN",
         "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDk5ZGY1NGI0ZTdhYWE0OWFhMGJjYyIsImlhdCI6MTY2MTg3MDcxNiwiZXhwIjoxNjY0NDYyNzE2fQ.Wwxle-tyLMGOntotXzEnfR3AdxEake6z9HryCh437Cc"
+      },
+      {
+        "name": "DETA_URL",
+        "value": "https://database.deta.sh/v1/c0rd2c5e/images"
       }
     ]
   }

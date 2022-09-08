@@ -44,7 +44,7 @@ const HomeScreen = () => {
                   <Product product={product} />
                 </Col>
               ))}
-              {/* delete Hello here  */}
+              {"test: " + process.env.REACT_APP_FETCH_URL}
             </Row>
             <Paginate
                 pages={pages}
