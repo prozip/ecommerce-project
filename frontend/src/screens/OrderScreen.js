@@ -47,7 +47,7 @@ const OrderScreen = () => {
             navigate('/login')
         }
         const addPayPalScript = async () => {
-            const { data: clientId } = await axios.get('/api/config/paypal')
+            const { data: clientId } = await axios.get(`${process.env.REACT_APP_FETCH_URL}/api/config/paypal`)
             setClientIdReady(clientId)
         }
         if (!order || successPay || successDeliver) {
@@ -105,7 +105,7 @@ const OrderScreen = () => {
                                     <ListGroup.Item key={index}>
                                         <Row>
                                             <Col md='5'>
-                                                <Image src={item.image} alt={item.name} fluid round />
+                                                <Image src={`${process.env.REACT_APP_FETCH_URL}/${item.image}`} alt={item.name} fluid round />
                                             </Col>
 
                                             <Col>

@@ -18,12 +18,13 @@ connectDB()
 const app = express()
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: true,
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     credentials: true
 }
 
 app.use(cors(corsOptions));
+  
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
@@ -43,8 +44,8 @@ app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID)
 })
 
-const __dirname = path.resolve()
-app.use('/upload', express.static(path.join(__dirname, 'uploads')))
+// const __dirname = path.resolve()
+// app.use('/upload', express.static(path.join(__dirname, 'uploads')))
 
 app.use(notFound)
 app.use(errorHandler)
