@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken'
+import fs from 'fs'
 
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+    var privateKey = fs.readFileSync('private.pem');
+    return jwt.sign({ id }, privateKey, {
         algorithm: 'ES384',
         expiresIn: '30d'
     })

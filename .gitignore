@@ -13,6 +13,11 @@ node_modules
 # production
 /build
 
+# jwt key
+*.pem
+*.der
+
+
 # misc
 .DS_Store
 .env

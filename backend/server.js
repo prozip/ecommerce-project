@@ -17,6 +17,40 @@ dotenv.config()
 connectDB()
 const app = express()
 
+
+
+import * as Sentry from "@sentry/node";
+import * as Tracing from "@sentry/tracing";
+Sentry.init({
+  dsn: "https://8037f1a241224aae9760f9922402f3c8@o1406867.ingest.sentry.io/6744338",
+  integrations: [
+    // enable HTTP calls tracing
+    new Sentry.Integrations.Http({ tracing: true }),
+    // enable Express.js middleware tracing
+    new Tracing.Integrations.Express({ app }),
+  ],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
+// RequestHandler creates a separate execution context using domains, so that every
+// transaction/span/breadcrumb is attached to its own Hub instance
+app.use(Sentry.Handlers.requestHandler());
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler());
+
+
+//  ================= WAF ===============
+// import Waf from 'mini-waf/wafbase';
+// import wafrules from 'mini-waf/wafrules';
+
+// //Register the middleware of Mini-WAF with standard rules.
+// app.use(Waf.WafMiddleware(wafrules.DefaultSettings));
+//  =====================================
+
 var corsOptions = {
     origin: true,
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -32,7 +66,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/', function rootHandler(req, res){
     res.send('API is running...')
 })
 app.use('/api/products', productRoutes)
@@ -44,11 +78,23 @@ app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID)
 })
 
-// const __dirname = path.resolve()
-// app.use('/upload', express.static(path.join(__dirname, 'uploads')))
+// app.use(notFound)
+// app.use(errorHandler)
 
-app.use(notFound)
-app.use(errorHandler)
+
+
+// app.get("/debug-sentry", function mainHandler(req, res) {
+//     throw new Error("My first Sentry error!");
+//   });
+// The error handler must be before any other error middleware and after all controllers
+app.use(Sentry.Handlers.errorHandler());
+// Optional fallthrough error handler
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // and optionally displayed to the user for support.
+  res.statusCode = 500;
+  res.end(res.sentry + "\n");
+});
 
 // default port: 5000
 const PORT = process.env.PORT || 5000
