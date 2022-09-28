@@ -55,7 +55,7 @@ const OrderScreen = () => {
         } else if (!order.isPaid) {
         }
     }, [dispatch, orderId, successPay, successDeliver, order, navigate, userInfo])
-
+    
     const momoHandler = () => {
         axios.get(`${process.env.REACT_APP_FETCH_URL}/api/payment/momo`, {
             params: {
@@ -64,10 +64,16 @@ const OrderScreen = () => {
           }).then((res) => {
             setMomoLink(res.data)
             console.log(res.data)
-            var win = window.open(res.data, '_blank', 'noopener,noreferer');
-            win.onhashchange = function(e) {
-                if ( window.location.hash === "http://success") {
-                    win.close()
+            let newwindow = window.open(res.data, '_blank', 'noopener,noreferer');
+           // win.close()
+
+            console.log(newwindow)
+            newwindow.onload = function(){
+                newwindow.onpopstate = function(e) {
+                    console.log(e.state)
+                    if ( e.state.includes("success")) {
+                        window.close()
+                    }
                 }
             }
           })
