@@ -11,7 +11,7 @@ const PlaceOrderScreen = () => {
     const navigate = useNavigate()
 
     const cart = useSelector(state => state.cart)
-
+    console.log(cart.paymentMethod)
     //Calculate prices
     const addDecimals = (num) => {
         return (Math.round(num*100)/100).toFixed(2)
@@ -32,9 +32,13 @@ const PlaceOrderScreen = () => {
 
     useEffect(() => {
         if(success){
+            if (cart.paymentMethod === "Momo"){
+                navigate(`/order2/${order._id}`)
+            }else{
             navigate(`/order/${order._id}`)
+            }
         }
-    },[navigate, order , success]) 
+    },[navigate, order , cart.paymentMethod, success]) 
 
     const placeOrderHandler = () => {
         dispatch(

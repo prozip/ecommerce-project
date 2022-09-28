@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-09-06T09:24:00.823Z",
-    "modified": "2022-09-06T09:31:21.695Z",
+    "modified": "2022-09-27T10:13:13.560Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -25,6 +25,25 @@
     "modified": "2022-09-06T10:00:48.158Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "6f825e9f-64b8-42a2-b739-04872646f71b",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/api/payment/momo",
+    "url": "http://localhost:5000/api/payment/momo",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-09-27T10:05:48.081Z",
+    "modified": "2022-09-27T10:29:24.161Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\"amount\":\"100000\"}",
+      "form": []
+    },
     "tests": []
   }
 ]
