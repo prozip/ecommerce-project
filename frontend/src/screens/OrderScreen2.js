@@ -56,6 +56,7 @@ const OrderScreen = () => {
         }
     }, [dispatch, orderId, successPay, successDeliver, order, navigate, userInfo])
     
+    
     const momoHandler = () => {
         axios.get(`${process.env.REACT_APP_FETCH_URL}/api/payment/momo`, {
             params: {
@@ -64,18 +65,30 @@ const OrderScreen = () => {
           }).then((res) => {
             setMomoLink(res.data)
             console.log(res.data)
-            let newwindow = window.open(res.data, '_blank', 'noopener,noreferer');
+            var neww = window.open(res.data, '_blank', 'noreferer');
            // win.close()
-
-            console.log(newwindow)
-            newwindow.onload = function(){
-                newwindow.onpopstate = function(e) {
-                    console.log(e.state)
-                    if ( e.state.includes("success")) {
-                        window.close()
+            console.log(neww)
+                // neww.onpopstate = function(e) {
+                //     console.log(e.state)
+                //     if ( e.state.includes("success")) {
+                //         window.close()
+                //     }
+                // }
+                setInterval(function name(params) {
+                    console.log(neww.location.href)
+                    if (neww.location.href.includes('success')){
+                        neww.close()
                     }
-                }
-            }
+                },500)
+                    
+                    
+        // window.open(res.data, '_blank', 'noopener,noreferer')
+        // window.onpopstate = function(e) {
+        //                 console.log(e.state)
+        //                 if ( e.state.includes("success")) {
+        //                     window.close()
+        //                 }
+        //             }
           })
     }
 
