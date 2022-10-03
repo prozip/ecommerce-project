@@ -2,10 +2,8 @@
 const OrderReturn = () => {
 
     return (
-        <div>
-
-            <h1>done</h1>
-            <h3>Tự tắt đi</h3>
+        <div class='boxMomo'>
+            <h1>Tiếp tục mua hàng!</h1>
         </div>
     )
 }

@@ -60,7 +60,7 @@ const OrderScreen = () => {
     const momoHandler = () => {
         axios.get(`${process.env.REACT_APP_FETCH_URL}/api/payment/momo`, {
             params: {
-                amount: String(parseInt(order.itemsPrice))
+                amount: String(parseInt(order.totalPrice*24000))
             }
         }).then((res) => {
             setMomoLink(res.data)
@@ -155,21 +155,21 @@ const OrderScreen = () => {
                         <ListGroup.Item>
                             <Row>
                                 <Col>Shipping</Col>
-                                <Col>${order.shippingPrice}</Col>
+                                <Col>{order.shippingPrice*24000} VND</Col>
                             </Row>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
                             <Row>
                                 <Col>Tax</Col>
-                                <Col>${order.taxPrice}</Col>
+                                <Col>{order.taxPrice*24000} VND</Col>
                             </Row>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
                             <Row>
                                 <Col>Total</Col>
-                                <Col>${order.totalPrice}</Col>
+                                <Col>{order.totalPrice*24000} VND</Col>
                             </Row>
                         </ListGroup.Item>
                         {!order.isPaid && (
