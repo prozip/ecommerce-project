@@ -19,7 +19,7 @@ const OrderScreen = () => {
 
     const dispatch = useDispatch()
 
-    
+
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
 
@@ -32,20 +32,20 @@ const OrderScreen = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const [ momoLink, setMomoLink ] = useState()
-    
+    const [momoLink, setMomoLink] = useState()
+
     if (!loading) {
         //Calculate prices
         const addDecimals = (num) => {
             return (Math.round(num * 100) / 100).toFixed(2)
         }
         order.itemsPrice = addDecimals(order.orderItems.reduce(
-            (acc, item) => acc + item.price * item.qty*24000, 0
+            (acc, item) => acc + item.price * item.qty * 24000, 0
         ))
     }
 
     useEffect(() => {
-        if(!userInfo){
+        if (!userInfo) {
             navigate('/login')
         }
         if (!order || successPay || successDeliver) {
@@ -55,41 +55,21 @@ const OrderScreen = () => {
         } else if (!order.isPaid) {
         }
     }, [dispatch, orderId, successPay, successDeliver, order, navigate, userInfo])
-    
-    
+
+
     const momoHandler = () => {
         axios.get(`${process.env.REACT_APP_FETCH_URL}/api/payment/momo`, {
             params: {
-              amount: String(parseInt(order.itemsPrice))
+                amount: String(parseInt(order.itemsPrice))
             }
-          }).then((res) => {
+        }).then((res) => {
             setMomoLink(res.data)
             console.log(res.data)
             var neww = window.open(res.data, '_blank', 'noreferer');
-           // win.close()
-            console.log(neww)
-                // neww.onpopstate = function(e) {
-                //     console.log(e.state)
-                //     if ( e.state.includes("success")) {
-                //         window.close()
-                //     }
-                // }
-                setInterval(function name(params) {
-                    console.log(neww.location.href)
-                    if (neww.location.href.includes('success')){
-                        neww.close()
-                    }
-                },500)
-                    
-                    
-        // window.open(res.data, '_blank', 'noopener,noreferer')
-        // window.onpopstate = function(e) {
-        //                 console.log(e.state)
-        //                 if ( e.state.includes("success")) {
-        //                     window.close()
-        //                 }
-        //             }
-          })
+            neww.addEventListener('close', () => {
+                console.log('load')
+            })
+        })
     }
 
     const deliverHandler = () => {
