@@ -65,13 +65,17 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:5000/api/orders/634963b5c452481b32e3d2b3/pay",
-    "url": "http://localhost:5000/api/orders/634963b5c452481b32e3d2b3/pay",
+    "url": "http://localhost:5000/api/orders/634e249cc7fb566d61c4f9a4/pay",
     "method": "PUT",
     "sortNum": 0,
     "created": "2022-10-14T13:30:17.101Z",
-    "modified": "2022-10-14T13:30:17.122Z",
+    "modified": "2022-10-18T04:05:22.011Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}"
+    },
     "tests": []
   }
 ]

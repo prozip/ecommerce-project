@@ -92,12 +92,7 @@ app.use('/api/payment/momo', paymentRoutes)
 // The error handler must be before any other error middleware and after all controllers
 app.use(Sentry.Handlers.errorHandler());
 // Optional fallthrough error handler
-app.use(function onError(err, req, res, next) {
-  // The error id is attached to `res.sentry` to be returned
-  // and optionally displayed to the user for support.
-  res.statusCode = 500;
-  res.end(res.sentry + "\n");
-});
+app.use(errorHandler);
 
 // default port: 5000
 const PORT = process.env.PORT || 5000

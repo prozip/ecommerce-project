@@ -39,12 +39,12 @@
     "method": "POST",
     "sortNum": 70000,
     "created": "2022-08-17T03:35:04.011Z",
-    "modified": "2022-09-12T13:30:17.612Z",
+    "modified": "2022-10-18T04:04:36.870Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\":\"son1@email.com\",\n  \"password\":\"123456\"\n}",
+      "raw": "{\n  \"email\":\"jane@example.com\",\n  \"password\":\"123456\"\n}",
       "form": []
     },
     "tests": [
@@ -126,16 +126,16 @@
     "colId": "49b09905-6899-4609-bb09-ac9352996577",
     "containerId": "a73af730-0c58-44ee-9666-22d97c98c8a6",
     "name": "GET /api/orders/:id",
-    "url": "{{URL}}/api/orders/630352d9121877f2ead90b16",
+    "url": "{{URL}}/api/orders/63099df54b4e7aaa49aa0bcc",
     "method": "GET",
     "sortNum": 130000,
     "created": "2022-08-22T10:20:58.222Z",
-    "modified": "2022-08-22T10:33:14.651Z",
+    "modified": "2022-10-18T04:38:14.152Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "{{TOKEN}}"
+      "bearer": "eyJhbGciOiJFUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDk5ZGY1NGI0ZTdhYWE0OWFhMGJjYyIsImlhdCI6MTY2NjA2NzAzMSwiZXhwIjoxNjY4NjU5MDMxfQ.AAAAAAAAAAAAAAAAAAAAALdF8hIP4-MCLiRL0Mdi86zBanu4LnU4ORq_F8cEuOrRAAAAAAAAAAAAAAAAAAAAAN74jOoGH9dTByixaYpyk6Z4V7ub9VA1HD81V--DOVjb"
     },
     "tests": []
   },

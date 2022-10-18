@@ -19,7 +19,9 @@ const MomoPay = () => {
                     update_time: "",
                     email_address: ""
                 }))
-                // window.close()
+                setTimeout(function(){
+                    window.close()
+                }, 2000);
             }else{
                 if (current_url.href.includes("denied")){
                     alert('fail')

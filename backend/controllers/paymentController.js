@@ -21,7 +21,7 @@ const paymentItems = asyncHandler(async (req, res) => {
         var requestId = partnerCode + new Date().getTime();
         var orderId = requestId;
         var orderInfo = "pay with MoMo";
-        var redirectUrl = "http://localhost:3000";
+        var redirectUrl = "";
         var ipnUrl = "https://callback.url/notify";
         // var ipnUrl = redirectUrl = "https://webhook.site/454e7b77-f177-4ece-8236-ddf1c26ba7f8";
         var requestType = "captureWallet"

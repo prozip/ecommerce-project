@@ -61,7 +61,12 @@ const OrderScreen = () => {
             }
         }).then((res) => {
             var neww = window.open(`/momopay/${window.btoa(res.data)}/${orderId}`, '_blank', 'noreferer');
-
+            var timer = setInterval(function() { 
+                if(neww.closed) {
+                    clearInterval(timer);
+                    window.location.reload();
+                }
+            }, 1000);
         })
     }
 
