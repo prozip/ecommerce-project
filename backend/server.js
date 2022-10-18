@@ -13,6 +13,7 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import paymentRoutes from './routes/paymentRoutes.js'
+import hookRoutes from './routes/hookRoutes.js'
 dotenv.config()
 connectDB()
 const app = express()
@@ -72,6 +73,8 @@ app.get('/', function rootHandler(req, res){
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/payment_hook', hookRoutes)
+
 app.use('/api/upload', uploadRoutes)
 
 app.get('/api/config/paypal', (req, res) => {

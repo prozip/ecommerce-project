@@ -20,6 +20,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import OrderScreen2 from './screens/OrderScreen2'
 import OrderReturn from './screens/OrderReturn'
+import MomoPay from './screens/MomoPay'
 
 const App = () => {
   return (
@@ -31,7 +32,8 @@ const App = () => {
           <Routes>
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/order2/:id' element={<OrderScreen2 />} />
-            <Route path='/orderreturn' element={<OrderReturn />} />
+            <Route path='/orderreturn' element={<OrderReturn />} exact/>
+            <Route path='/momopay/:momourl/:orderid' element={<MomoPay />} exact/>
             <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />

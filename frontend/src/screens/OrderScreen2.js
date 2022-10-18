@@ -1,13 +1,13 @@
 import axios from 'axios'
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
+import { getOrderDetails, deliverOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
+
 
 
 const OrderScreen = () => {
@@ -15,7 +15,6 @@ const OrderScreen = () => {
     const params = useParams()
     const orderId = params.id
 
-    const [clientIdReady, setClientIdReady] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -32,7 +31,6 @@ const OrderScreen = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const [momoLink, setMomoLink] = useState()
 
     if (!loading) {
         //Calculate prices
@@ -43,7 +41,6 @@ const OrderScreen = () => {
             (acc, item) => acc + item.price * item.qty * 24000, 0
         ))
     }
-
     useEffect(() => {
         if (!userInfo) {
             navigate('/login')
@@ -63,12 +60,8 @@ const OrderScreen = () => {
                 amount: String(parseInt(order.totalPrice*24000))
             }
         }).then((res) => {
-            setMomoLink(res.data)
-            console.log(res.data)
-            var neww = window.open(res.data, '_blank', 'noreferer');
-            neww.addEventListener('close', () => {
-                console.log('load')
-            })
+            var neww = window.open(`/momopay/${window.btoa(res.data)}/${orderId}`, '_blank', 'noreferer');
+
         })
     }
 

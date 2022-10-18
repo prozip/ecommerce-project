@@ -99,6 +99,8 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
             },
         }
 
+        console.log(userInfo, dispatch, getState)
+
         const { data } = await axios.put(`${process.env.REACT_APP_FETCH_URL}/api/orders/${orderId}/pay`, paymentResult, config)
 
         dispatch({

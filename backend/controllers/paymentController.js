@@ -4,7 +4,6 @@ import asyncHandler from "express-async-handler";
 import { createHmac } from 'crypto';
 import { request } from 'https';
 
-
 //json object send to MoMo endpoint
 const paymentItems = asyncHandler(async (req, res) => {
     const {
@@ -22,7 +21,7 @@ const paymentItems = asyncHandler(async (req, res) => {
         var requestId = partnerCode + new Date().getTime();
         var orderId = requestId;
         var orderInfo = "pay with MoMo";
-        var redirectUrl = "http://localhost:3000/orderreturn";
+        var redirectUrl = "http://localhost:3000";
         var ipnUrl = "https://callback.url/notify";
         // var ipnUrl = redirectUrl = "https://webhook.site/454e7b77-f177-4ece-8236-ddf1c26ba7f8";
         var requestType = "captureWallet"
@@ -32,15 +31,10 @@ const paymentItems = asyncHandler(async (req, res) => {
         //accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType
         var rawSignature = "accessKey="+accessKey+"&amount=" + amount+"&extraData=" + extraData+"&ipnUrl=" + ipnUrl+"&orderId=" + orderId+"&orderInfo=" + orderInfo+"&partnerCode=" + partnerCode +"&redirectUrl=" + redirectUrl+"&requestId=" + requestId+"&requestType=" + requestType
         //puts raw signature
-        console.log("--------------------RAW SIGNATURE----------------")
-        console.log(rawSignature)
         //signature
         var signature = createHmac('sha256', secretKey)
             .update(rawSignature)
             .digest('hex');
-        console.log("--------------------SIGNATURE----------------")
-        console.log(signature)
-        console.log(amount)
         const requestBody = JSON.stringify({
             partnerCode : partnerCode,
             accessKey : accessKey,
@@ -69,8 +63,6 @@ const paymentItems = asyncHandler(async (req, res) => {
         }
         //Send the request and get the response
         const req2 = request(options, res2 => {
-            console.log(`Status: ${res2.statusCode}`);
-            console.log(`Headers: ${JSON.stringify(res2.headers)}`);
             res2.setEncoding('utf8');
             res2.on('data', (body) => {
                 console.log('Body: ');
@@ -85,7 +77,6 @@ const paymentItems = asyncHandler(async (req, res) => {
         })
         
         req2.on('error', (e) => {
-            console.log(`problem with request: ${e.message}`);
             res.status(500).send("Payment error!")
         });
         // write data to request body
