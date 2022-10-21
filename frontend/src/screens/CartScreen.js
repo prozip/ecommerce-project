@@ -81,7 +81,7 @@ const CartScreen = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>
-                  Proceed To Cart
+                  Proceed To Checkout
                 </Button>
               </ListGroup.Item>
             </ListGroup>

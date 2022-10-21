@@ -31,14 +31,20 @@
     "_id": "6f825e9f-64b8-42a2-b739-04872646f71b",
     "colId": "history",
     "containerId": "",
-    "name": "http://localhost:5000/api/payment/momo",
-    "url": "http://localhost:5000/api/payment/momo",
+    "name": "http://localhost:5000/api/payment",
+    "url": "http://localhost:5000/api/payment/zalo?amount=50000",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-09-27T10:05:48.081Z",
-    "modified": "2022-09-27T10:29:24.161Z",
+    "modified": "2022-10-21T09:15:30.185Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "amount",
+        "value": "50000",
+        "isPath": false
+      }
+    ],
     "body": {
       "type": "json",
       "raw": "{\"amount\":\"100000\"}",
@@ -75,6 +81,25 @@
     "auth": {
       "type": "bearer",
       "bearer": "{{TOKEN}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "19ca2ab6-8205-4d84-8022-112ae3393660",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://qcgateway.zalopay.vn/api/gettransstatusbyapptransid",
+    "url": "https://qcgateway.zalopay.vn/api/gettransstatusbyapptransid",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-10-21T09:58:33.975Z",
+    "modified": "2022-10-21T09:58:45.694Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"zptranstoken\": \"221021000003633X22w2O1\",\n  \"appid\": \"2553\",\n  \"apptransid\": \"221021_94389772\"\n}",
+      "form": []
     },
     "tests": []
   }

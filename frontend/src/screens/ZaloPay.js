@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { payOrder } from '../actions/orderActions'
 
-const MomoPay = () => {
+const ZaloPay = () => {
     const params = useParams()
     const dispatch = useDispatch()
     const orderId = params.orderid
-    
+    console.log(params);
     const handleLoad = (e) =>{
         let current_url = e.target.contentWindow.location
         if (current_url){
@@ -21,7 +21,7 @@ const MomoPay = () => {
                 }))
                 setTimeout(function(){
                     window.close()
-                }, 2000);
+                }, 500);
             }else{
                 if (current_url.href.includes("denied")){
                     alert('fail')
@@ -32,11 +32,11 @@ const MomoPay = () => {
         }
     }
     return (
-    <iframe id="iframe" src={window.atob(params.momourl)}
+    <iframe id="iframe" src={`https://qcgateway.zalopay.vn/openinapp?order=${params.zalourl}`}
         onLoad={e => handleLoad(e)}
         style={{position:"fixed", top:0, left:0, bottom:0, right:0, width:"100%", height:"100%", border:"none", margin:0, padding:0, overflow:"hidden", zIndex:999999}}>
         Your browser doesn't support iframes
     </iframe>
     )
 }
-export default MomoPay
+export default ZaloPay

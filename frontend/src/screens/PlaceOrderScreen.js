@@ -35,7 +35,11 @@ const PlaceOrderScreen = () => {
             if (cart.paymentMethod === "Momo"){
                 navigate(`/order2/${order._id}`)
             }else{
-            navigate(`/order/${order._id}`)
+                if (cart.paymentMethod === "ZaloPay"){
+                    navigate(`/order3/${order._id}`)
+                }else{
+                    navigate(`/order/${order._id}`)
+                }
             }
         }
     },[navigate, order , cart.paymentMethod, success]) 

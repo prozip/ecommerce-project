@@ -3,14 +3,17 @@
 import asyncHandler from "express-async-handler";
 import { createHmac } from 'crypto';
 import { request } from 'https';
+import axios from 'axios'; // npm install axios
+import CryptoJS from 'crypto-js'; // npm install crypto-js
+import { v1 as uuid } from 'uuid'; // npm install uuid
+import moment from 'moment'; // npm install moment
 
 //json object send to MoMo endpoint
 const paymentItems = asyncHandler(async (req, res) => {
     const {
-      amount
+        amount
     } = req.query
 
-    console.log(amount)
     if (amount && amount.length === 0) {
         res.status(400)
         throw new Error('No payment items')
@@ -21,7 +24,7 @@ const paymentItems = asyncHandler(async (req, res) => {
         var requestId = partnerCode + new Date().getTime();
         var orderId = requestId;
         var orderInfo = "pay with MoMo";
-        var redirectUrl = "";
+        var redirectUrl = "about:blank";
         var ipnUrl = "https://callback.url/notify";
         // var ipnUrl = redirectUrl = "https://webhook.site/454e7b77-f177-4ece-8236-ddf1c26ba7f8";
         var requestType = "captureWallet"
@@ -29,28 +32,28 @@ const paymentItems = asyncHandler(async (req, res) => {
 
         //before sign HMAC SHA256 with format
         //accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType
-        var rawSignature = "accessKey="+accessKey+"&amount=" + amount+"&extraData=" + extraData+"&ipnUrl=" + ipnUrl+"&orderId=" + orderId+"&orderInfo=" + orderInfo+"&partnerCode=" + partnerCode +"&redirectUrl=" + redirectUrl+"&requestId=" + requestId+"&requestType=" + requestType
+        var rawSignature = "accessKey=" + accessKey + "&amount=" + amount + "&extraData=" + extraData + "&ipnUrl=" + ipnUrl + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&partnerCode=" + partnerCode + "&redirectUrl=" + redirectUrl + "&requestId=" + requestId + "&requestType=" + requestType
         //puts raw signature
         //signature
         var signature = createHmac('sha256', secretKey)
             .update(rawSignature)
             .digest('hex');
         const requestBody = JSON.stringify({
-            partnerCode : partnerCode,
-            accessKey : accessKey,
-            requestId : requestId,
-            amount : amount,
-            orderId : orderId,
-            orderInfo : orderInfo,
-            redirectUrl : redirectUrl,
-            ipnUrl : ipnUrl,
-            extraData : extraData,
-            requestType : requestType,
-            signature : signature,
+            partnerCode: partnerCode,
+            accessKey: accessKey,
+            requestId: requestId,
+            amount: amount,
+            orderId: orderId,
+            orderInfo: orderInfo,
+            redirectUrl: redirectUrl,
+            ipnUrl: ipnUrl,
+            extraData: extraData,
+            requestType: requestType,
+            signature: signature,
             lang: 'en'
         });
         //Create the HTTPS objects
-        
+
         const options = {
             hostname: 'test-payment.momo.vn',
             port: 443,
@@ -75,7 +78,7 @@ const paymentItems = asyncHandler(async (req, res) => {
                 console.log('No more data in response.');
             });
         })
-        
+
         req2.on('error', (e) => {
             res.status(500).send("Payment error!")
         });
@@ -86,6 +89,71 @@ const paymentItems = asyncHandler(async (req, res) => {
     }
 })
 
-export { 
-    paymentItems
+const zaloPaymentItems = asyncHandler(async (req, res) => {
+    const { amount, orderId } = req.query
+
+    if (amount && amount.length === 0) {
+        res.status(400)
+        throw new Error('No payment items')
     }
+
+
+    const config = {
+        app_id: process.env.app_id,
+        key1: process.env.key1,
+        key2: process.env.key2,
+        endpoint: "https://mep.zpapps.vn/v2/zlp-demo/create_order"
+    };
+
+    const embed_data = {
+        orderId: orderId
+    };
+
+    const items = [{}];
+    const transID = Math.floor(Math.random() * 1000000);
+    const order = {
+        app_id: config.app_id,
+        app_trans_id: `${moment().format('YYMMDD')}_${transID}`, // translation missing: vi.docs.shared.sample_code.comments.app_trans_id
+        app_user: "demo",
+        app_time: Date.now(), // miliseconds
+        item: JSON.stringify(items),
+        embed_data: JSON.stringify(embed_data),
+        amount: amount,
+        description: `Lazada - Payment for the order #${transID}`,
+        bank_code: "zalopayapp",
+    };
+
+    // appid|app_trans_id|appuser|amount|apptime|embeddata|item
+    const data = config.app_id + "|" + order.app_trans_id + "|" + order.app_user + "|" + order.amount + "|" + order.app_time + "|" + order.embed_data + "|" + order.item;
+    order.mac = CryptoJS.HmacSHA256(data, config.key1).toString();
+
+    // axios.post(config.endpoint, null, { params: order })
+    // .then(res2 => {
+    //     console.log(res2);
+    //     let order_url = JSON.parse(res2.data.response_data).order_url;
+    //     res.status(201).send(order_url)
+    // })
+    // .catch(err2 => console.log(err2)); 
+
+    // axios.post(`${config.endpoint}?app_id=${order.app_id}&key1=${config.key1}&key2=${config.key2}&amount=${order.amount}&app_user=demo&embed_data=%7B%22promotioninfo%22%3A%22%22%2C%22merchantinfo%22%3A%22embeddata123%22%7D&item=%5B%7B%22itemid%22%3A%22knb%22%2C%22itemname%22%3A%22kim%20nguyen%20bao%22%2C%22itemprice%22%3A198400%2C%22itemquantity%22%3A1%7D%5D&description=Demo%20%26%2345%3B%20Thanh%20to%26%23225%3Bn%20%26%23273%3B%26%23417%3Bn%20h%26%23224%3Bng%20%26%2335%3B%26%2360%3BORDERID%26%2362%3B`)
+    // .then(res2 => {
+    //         console.log(res2);
+    //         let order_url = JSON.parse(res2.data.response_data).order_url;
+    //         res.status(201).send(order_url)
+    //     })
+    //     .catch(err2 => console.log(err2)); 
+
+
+    var des = `Thanh toán đơn hàng trên Martee: - ${orderId}`
+    var redirect_url = "https://www.google.com"
+    axios.post(`${config.endpoint}?app_id=${config.app_id}&key1=PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL&key2=kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz&amount=${amount}&app_user=userdemo&embed_data=${JSON.stringify(embed_data)}&item=%5B%7B%22itemid%22%3A%22knb%22%2C%22itemname%22%3A%22kim%20nguyen%20bao%22%2C%22itemprice%22%3A198400%2C%22itemquantity%22%3A1%7D%5D&description=${des}&redirect_url=${redirect_url}`)
+        .then(res2 => {
+            console.log(res2);
+            let order_url = JSON.parse(res2.data.response_data).order_url;
+            res.status(201).send(order_url)
+        })
+        .catch(err2 => console.log(err2));
+
+})
+
+export { paymentItems, zaloPaymentItems }
