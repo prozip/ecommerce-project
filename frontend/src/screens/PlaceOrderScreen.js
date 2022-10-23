@@ -29,18 +29,16 @@ const PlaceOrderScreen = () => {
     
     const orderCreate = useSelector(state => state.orderCreate)
     const { order, success, error } = orderCreate
+    const payMethod = {
+        "PayPal":"order",
+        "Momo":"order2",
+        "ZaloPay":"order3",
+        "VNPay":"order4"
+    }
 
     useEffect(() => {
         if(success){
-            if (cart.paymentMethod === "Momo"){
-                navigate(`/order2/${order._id}`)
-            }else{
-                if (cart.paymentMethod === "ZaloPay"){
-                    navigate(`/order3/${order._id}`)
-                }else{
-                    navigate(`/order/${order._id}`)
-                }
-            }
+            navigate(`/${payMethod[cart.paymentMethod]}/${order._id}`)
         }
     },[navigate, order , cart.paymentMethod, success]) 
 

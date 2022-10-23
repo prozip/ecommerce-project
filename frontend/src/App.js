@@ -20,9 +20,11 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import OrderScreen2 from './screens/OrderScreen2'
 import OrderScreen3 from './screens/OrderScreen3'
+import OrderScreen4 from './screens/OrderScreen4'
 import OrderReturn from './screens/OrderReturn'
 import MomoPay from './screens/MomoPay'
 import ZaloPay from './screens/ZaloPay'
+import VNPay from './screens/VNPay'
 
 const App = () => {
   return (
@@ -35,9 +37,11 @@ const App = () => {
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/order2/:id' element={<OrderScreen2 />} />
             <Route path='/order3/:id' element={<OrderScreen3 />} />
+            <Route path='/order4/:id' element={<OrderScreen4 />} />
             <Route path='/orderreturn' element={<OrderReturn />} exact/>
             <Route path='/momopay/:momourl/:orderid' element={<MomoPay />} exact/>
             <Route path='/zalopay/:zalourl/:orderid' element={<ZaloPay />} exact/>
+            <Route path='/vnpay/:vnpayurl/:orderid' element={<VNPay />} exact/>
             <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />

@@ -32,24 +32,29 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:5000/api/payment",
-    "url": "http://localhost:5000/api/payment/zalo?amount=50000",
+    "url": "http://localhost:5000/api/payment/vnpay?amount=50000&orderDescription=hello&orderType=1",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-09-27T10:05:48.081Z",
-    "modified": "2022-10-21T09:15:30.185Z",
+    "modified": "2022-10-23T03:44:54.986Z",
     "headers": [],
     "params": [
       {
         "name": "amount",
         "value": "50000",
         "isPath": false
+      },
+      {
+        "name": "orderDescription",
+        "value": "hello",
+        "isPath": false
+      },
+      {
+        "name": "orderType",
+        "value": "1",
+        "isPath": false
       }
     ],
-    "body": {
-      "type": "json",
-      "raw": "{\"amount\":\"100000\"}",
-      "form": []
-    },
     "tests": []
   },
   {
@@ -101,6 +106,156 @@
       "raw": "{\n  \"zptranstoken\": \"221021000003633X22w2O1\",\n  \"appid\": \"2553\",\n  \"apptransid\": \"221021_94389772\"\n}",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "cba49f3f-67a3-471e-8a60-3974f4f69a0c",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.thunderclient.com/welcome",
+    "url": "http://localhost:5000/api/payment/vnpay_check?vnp_Amount=5000000&vnp_BankCode=NCB&vnp_BankTranNo=VNP13861341&vnp_CardType=ATM&vnp_OrderInfo=hello&vnp_PayDate=20221023100205&vnp_ResponseCode=00&vnp_TmnCode=TSDZWTE9&vnp_TransactionNo=13861341&vnp_TransactionStatus=00&vnp_TxnRef=091055&vnp_SecureHash=b7c6c173d68520831ac9a6456dac5bb23dce957dacb8bc32ed2d055bb37812ee6a98d5e2a6ce0692fe9d10b131a64572db8d1ca9c0336461aef4536043c55e24",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-22T14:36:36.850Z",
+    "modified": "2022-10-23T03:33:21.622Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "vnp_Amount",
+        "value": "5000000",
+        "isPath": false
+      },
+      {
+        "name": "vnp_BankCode",
+        "value": "NCB",
+        "isPath": false
+      },
+      {
+        "name": "vnp_BankTranNo",
+        "value": "VNP13861341",
+        "isPath": false
+      },
+      {
+        "name": "vnp_CardType",
+        "value": "ATM",
+        "isPath": false
+      },
+      {
+        "name": "vnp_OrderInfo",
+        "value": "hello",
+        "isPath": false
+      },
+      {
+        "name": "vnp_PayDate",
+        "value": "20221023100205",
+        "isPath": false
+      },
+      {
+        "name": "vnp_ResponseCode",
+        "value": "00",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TmnCode",
+        "value": "TSDZWTE9",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TransactionNo",
+        "value": "13861341",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TransactionStatus",
+        "value": "00",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TxnRef",
+        "value": "091055",
+        "isPath": false
+      },
+      {
+        "name": "vnp_SecureHash",
+        "value": "b7c6c173d68520831ac9a6456dac5bb23dce957dacb8bc32ed2d055bb37812ee6a98d5e2a6ce0692fe9d10b131a64572db8d1ca9c0336461aef4536043c55e24",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "3a934cf9-5f0d-4a79-ae65-0be7bf77f3d7",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/payment/vnpay_check?vnp_Amount=30000000&vnp_BankCode=NCB&vnp_BankTranNo=VNP13861354&vnp_CardType=ATM&vnp_OrderInfo=6354b8a7159c0ad5f1e3c422&vnp_PayDate=20221023104700&vnp_ResponseCode=00&vnp_TmnCode=TSDZWTE9&vnp_TransactionNo=13861354&vnp_TransactionStatus=00&vnp_TxnRef=101007&vnp_SecureHash=ee73979680501b7795bf7b72dfd08c254b4cfc55378ff218ba2f7706a590e654be0d4c2144f5ff14dbb38d4b5e8a84984016d148b76e5025515489d03b8b58d7",
+    "url": "http://localhost:3000/api/payment/vnpay_check?vnp_Amount=30000000&vnp_BankCode=NCB&vnp_BankTranNo=VNP13861354&vnp_CardType=ATM&vnp_OrderInfo=6354b8a7159c0ad5f1e3c422&vnp_PayDate=20221023104700&vnp_ResponseCode=00&vnp_TmnCode=TSDZWTE9&vnp_TransactionNo=13861354&vnp_TransactionStatus=00&vnp_TxnRef=101007&vnp_SecureHash=ee73979680501b7795bf7b72dfd08c254b4cfc55378ff218ba2f7706a590e654be0d4c2144f5ff14dbb38d4b5e8a84984016d148b76e5025515489d03b8b58d7",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-23T03:47:40.423Z",
+    "modified": "2022-10-23T03:48:50.922Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "vnp_Amount",
+        "value": "30000000",
+        "isPath": false
+      },
+      {
+        "name": "vnp_BankCode",
+        "value": "NCB",
+        "isPath": false
+      },
+      {
+        "name": "vnp_BankTranNo",
+        "value": "VNP13861354",
+        "isPath": false
+      },
+      {
+        "name": "vnp_CardType",
+        "value": "ATM",
+        "isPath": false
+      },
+      {
+        "name": "vnp_OrderInfo",
+        "value": "6354b8a7159c0ad5f1e3c422",
+        "isPath": false
+      },
+      {
+        "name": "vnp_PayDate",
+        "value": "20221023104700",
+        "isPath": false
+      },
+      {
+        "name": "vnp_ResponseCode",
+        "value": "00",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TmnCode",
+        "value": "TSDZWTE9",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TransactionNo",
+        "value": "13861354",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TransactionStatus",
+        "value": "00",
+        "isPath": false
+      },
+      {
+        "name": "vnp_TxnRef",
+        "value": "101007",
+        "isPath": false
+      },
+      {
+        "name": "vnp_SecureHash",
+        "value": "ee73979680501b7795bf7b72dfd08c254b4cfc55378ff218ba2f7706a590e654be0d4c2144f5ff14dbb38d4b5e8a84984016d148b76e5025515489d03b8b58d7",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

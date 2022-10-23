@@ -7,6 +7,11 @@ import axios from 'axios'; // npm install axios
 import CryptoJS from 'crypto-js'; // npm install crypto-js
 import { v1 as uuid } from 'uuid'; // npm install uuid
 import moment from 'moment'; // npm install moment
+import dateFormat from 'dateformat';
+import querystring from 'qs'
+import crypto from "crypto"
+import Order from "../models/orderModel.js";
+
 
 //json object send to MoMo endpoint
 const paymentItems = asyncHandler(async (req, res) => {
@@ -156,4 +161,110 @@ const zaloPaymentItems = asyncHandler(async (req, res) => {
 
 })
 
-export { paymentItems, zaloPaymentItems }
+function sortObject(obj) {
+    var sorted = {};
+    var str = [];
+    var key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            str.push(encodeURIComponent(key));
+        }
+    }
+    str.sort();
+    for (key = 0; key < str.length; key++) {
+        sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
+    }
+    return sorted;
+}
+const vnpayPaymentItems = asyncHandler(async (req, res) => {
+    var ipAddr = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
+
+
+    var tmnCode = "TSDZWTE9"
+    var secretKey = "MCDQCMMHIMUMDYIGHOYBASQKGJSHUSKY"
+    var vnpUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"
+    var returnUrl = 'http://localhost:5000/api/payment/vnpay_check'
+
+
+    var createDate = dateFormat(date, 'yyyymmddHHmmss');
+    var orderId = dateFormat(date, 'HHmmss');
+    var amount = req.query.amount;
+    var bankCode = req.query.bankCode;
+
+    var orderInfo = req.query.orderDescription;
+    var orderType = req.query.orderType;
+    var locale = "vn"
+    var currCode = 'VND';
+    var vnp_Params = {};
+    vnp_Params['vnp_Version'] = '2.1.0';
+    vnp_Params['vnp_Command'] = 'pay';
+    vnp_Params['vnp_TmnCode'] = tmnCode;
+    // vnp_Params['vnp_Merchant'] = ''
+    vnp_Params['vnp_Locale'] = locale;
+    vnp_Params['vnp_CurrCode'] = currCode;
+    vnp_Params['vnp_TxnRef'] = orderId;
+    vnp_Params['vnp_OrderInfo'] = orderInfo;
+    vnp_Params['vnp_OrderType'] = orderType;
+    vnp_Params['vnp_Amount'] = amount * 100;
+    vnp_Params['vnp_ReturnUrl'] = returnUrl;
+    vnp_Params['vnp_IpAddr'] = ipAddr;
+    vnp_Params['vnp_CreateDate'] = createDate;
+
+    var date = new Date();
+    date.setDate(date.getDate() + 1)
+    vnp_Params['vnp_ExpireDate'] = dateFormat(date, 'yyyymmddHHmmss')
+    // if (bankCode !== null && bankCode !== '') {
+    //     vnp_Params['vnp_BankCode'] = bankCode;
+    // }
+
+    vnp_Params = sortObject(vnp_Params);
+
+    var signData = querystring.stringify(vnp_Params, { encode: false });
+    var hmac = crypto.createHmac("sha512", secretKey);
+    var signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");
+    vnp_Params['vnp_SecureHash'] = signed;
+    vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
+    console.log(vnpUrl);
+    res.status(201).send(vnpUrl)
+})
+
+const vnpayPaymentCheck = asyncHandler(async (req, res) => {
+    var vnp_Params = req.query;
+    var secureHash = vnp_Params['vnp_SecureHash'];
+
+    delete vnp_Params['vnp_SecureHash'];
+    delete vnp_Params['vnp_SecureHashType'];
+
+    vnp_Params = sortObject(vnp_Params);
+    var secretKey = "MCDQCMMHIMUMDYIGHOYBASQKGJSHUSKY"
+    var signData = querystring.stringify(vnp_Params, { encode: false });
+    var hmac = crypto.createHmac("sha512", secretKey);
+    var signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");
+
+
+    if (secureHash === signed) {
+        var orderId = vnp_Params['vnp_TxnRef'];
+        var rspCode = vnp_Params['vnp_ResponseCode'];
+        //Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
+
+        const order = await Order.findById(vnp_Params['vnp_OrderInfo'])
+        if (order) {
+            order.isPaid = true
+            order.paidAt = Date.now()
+            order.paymentMethod= "VNPay"
+            const updatedOrder = await order.save()
+            res.json(updatedOrder)
+        } else {
+            res.status(404)
+            throw new Error('Order not found')
+        }
+    }
+    else {
+        res.status(200).json({ RspCode: '97', Message: 'Fail checksum' })
+    }
+})
+
+export { paymentItems, zaloPaymentItems, vnpayPaymentItems, vnpayPaymentCheck }
