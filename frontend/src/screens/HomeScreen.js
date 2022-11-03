@@ -44,7 +44,6 @@ const HomeScreen = () => {
                   <Product product={product} />
                 </Col>
               ))}
-              {"test: " + process.env.REACT_APP_FETCH_URL}
             </Row>
             <Paginate
                 pages={pages}

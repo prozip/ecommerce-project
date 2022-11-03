@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "{{URL}}/upload",
-    "url": "{{URL}}/upload/image-1661779741935.jpg",
-    "method": "GET",
+    "url": "https://martee-api.deta.dev/api/upload",
+    "method": "POST",
     "sortNum": 0,
     "created": "2022-09-06T09:24:00.823Z",
-    "modified": "2022-09-27T10:13:13.560Z",
+    "modified": "2022-10-26T03:45:43.076Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -32,11 +32,11 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:5000/api/payment",
-    "url": "http://localhost:5000/api/payment/vnpay?amount=50000&orderDescription=hello&orderType=1",
+    "url": "https://martee-api.deta.dev/api/payment/vnpay?amount=50000&orderDescription=hello&orderType=1",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-09-27T10:05:48.081Z",
-    "modified": "2022-10-23T03:44:54.986Z",
+    "modified": "2022-11-02T04:59:31.452Z",
     "headers": [],
     "params": [
       {
@@ -253,6 +253,36 @@
       {
         "name": "vnp_SecureHash",
         "value": "ee73979680501b7795bf7b72dfd08c254b4cfc55378ff218ba2f7706a590e654be0d4c2144f5ff14dbb38d4b5e8a84984016d148b76e5025515489d03b8b58d7",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "b9715793-4bd8-40ad-b09e-990c40d3cd42",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://martee-api.deta.dev/api/payment/vnpay?amount=300000&orderType=1&orderDescription=63626e39dbf1cfdc18a73f76",
+    "url": "https://martee-api.deta.dev/api/payment/vnpay?amount=300000&orderType=1&orderDescription=63626e39dbf1cfdc18a73f76",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-02T13:33:23.182Z",
+    "modified": "2022-11-02T13:39:02.950Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "amount",
+        "value": "300000",
+        "isPath": false
+      },
+      {
+        "name": "orderType",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "orderDescription",
+        "value": "63626e39dbf1cfdc18a73f76",
         "isPath": false
       }
     ],
